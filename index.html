@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conf Ticket</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+
+<body>
+    <div id="main">
+        <img id="img1" src="./images/logo-full.svg" alt="">
+        <h1 class="h1">Your journey to coding conf 2025 starts here!</h1>
+        <p class="p1">Secure your spot at next year's biggest coding conference</p>
+        <p class="p2">Upload Avatar</p>
+        <form id="form">
+            <div id="sub">
+                <div id="upload-box">
+                    <label for="fileInput" id="upload-label">
+                        <img src="./images/icon-upload.svg" alt="">
+                        <p class="p4">Drag and Drop or Click to Upload</p>
+                    </label>
+                    <input class="in" type="file" name="file" id="fileInput" accept="image/*" hidden>
+                    <div id="preview" style="display: none;">
+                        <img id="preview-img" src="" alt="Avatar Preview">
+                        <div class="buttons">
+                            <button type="button" id="changeBtn">Change</button>
+                            <button type="button" id="removeBtn">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="p3">
+                <small>
+                    <img src="./images/icon-info.svg" alt="">
+                    Upload your picture (jpg or png, max size: 500kb)
+                </small>
+            </p>
+            <div class="form">
+                <label class="lab" for="name">Full Name :</label> <br>
+                <input class="input" type="text" id="myName" name="name"><br>
+                <label class="lab" for="email">Email Address :</label><br>
+                <input class="input" type="email" name="email" id="email" placeholder="example@email.com"><br>
+                <label class="lab" for="user">Github Username :</label><br>
+                <input class="input" type="text" name="user" id="user" placeholder="@yourusername"><br>
+                <button id="btn2">Generate my Ticket</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="./script/index.js"></script>
+</body>
+
+</html>
