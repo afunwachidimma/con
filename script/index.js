@@ -1,81 +1,3 @@
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     const form = document.getElementById("form");
-//     const fileInput = document.getElementById("fileInput");
-
-//     if (!form) {
-//         console.error("Form element (#form) not found on this page.");
-//         return;
-//     }
-
-//     form.addEventListener("submit", (e) => {
-//         e.preventDefault();
-//         console.log("Submit clicked");
-
-//         const name = (document.getElementById("myName") || {}).value?.trim() || "";
-//         const email = (document.getElementById("email") || {}).value?.trim() || "";
-//         const user = (document.getElementById("user") || {}).value?.trim() || "";
-//         const file = fileInput && fileInput.files && fileInput.files[0];
-
-//         // Basic validation
-//         if (!name || !email) {
-//             alert("Please enter both name and email.");
-//             return;
-//         }
-
-//         try {
-//             localStorage.setItem("confName", name);
-//             localStorage.setItem("confEmail", email);
-//             localStorage.setItem("confUser", user);
-//         } catch (err) {
-//             console.error("Error writing to localStorage:", err);
-//             alert("Unable to save form data in localStorage.");
-//             return;
-//         }
-
-//         // Generate a simple ticket id and save it
-//         const ticketId = "#" + Math.floor(10000 + Math.random() * 90000);
-//         localStorage.setItem("confTicketId", ticketId);
-
-//         // If there's an uploaded image, validate and save as base64, then redirect
-//         if (file) {
-//             if (!file.type.startsWith("image/")) {
-//                 alert("Please upload an image file (jpg/png).");
-//                 return;
-//             }
-//             const maxBytes = 500 * 1024; // 500KB requirement in your UI
-//             if (file.size > maxBytes) {
-//                 alert("Image too large. Please upload an image <= 500 KB.");
-//                 return;
-//             }
-
-//             const reader = new FileReader();
-//             reader.onload = (evt) => {
-//                 try {
-//                     localStorage.setItem("confAvatar", evt.target.result); // base64 string
-//                     console.log("Avatar saved to localStorage (base64). Redirecting...");
-//                     window.location.href = "index2.html";
-//                 } catch (err) {
-//                     console.error("Error saving avatar to localStorage:", err);
-//                     alert("Couldn't save the image. Try a smaller file or a different browser.");
-//                 }
-//             };
-//             reader.onerror = (err) => {
-//                 console.error("FileReader error:", err);
-//                 alert("Could not read the file you selected.");
-//             };
-//             reader.readAsDataURL(file);
-//         } else {
-//             // No image — just redirect
-//             console.log("No avatar uploaded. Redirecting to ticket page...");
-//             window.location.href = "index2.html";
-//         }
-//     });
-// });
-
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("form");
     const fileInput = document.getElementById("fileInput");
@@ -85,7 +7,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const removeBtn = document.getElementById("removeBtn");
     const uploadLabel = document.getElementById("upload-label");
 
-    // Show preview when image selected
+    const nameInput = document.getElementById("myName");
+    const emailInput = document.getElementById("email");
+    const userInput = document.getElementById("user");
+
+    const nameError = document.getElementById("nameError");
+    const emailError = document.getElementById("emailError");
+    const userError = document.getElementById("userError");
+    const avatarError = document.getElementById("avatarError");
+
+    // ========== IMAGE UPLOAD ==========
     fileInput.addEventListener("change", () => {
         const file = fileInput.files[0];
         if (file && file.type.startsWith("image/")) {
@@ -94,17 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 previewImg.src = e.target.result;
                 preview.style.display = "block";
                 uploadLabel.style.display = "none";
+                avatarError.style.display = "none"; // clear avatar error
             };
             reader.readAsDataURL(file);
         }
     });
 
-    // Change button → re-open input
-    changeBtn.addEventListener("click", () => {
-        fileInput.click();
-    });
+    changeBtn.addEventListener("click", () => fileInput.click());
 
-    // Remove button → reset
     removeBtn.addEventListener("click", () => {
         fileInput.value = "";
         previewImg.src = "";
@@ -112,31 +40,52 @@ document.addEventListener("DOMContentLoaded", () => {
         uploadLabel.style.display = "block";
     });
 
-    // Handle form submission
+    // ========== FORM SUBMIT ==========
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const name = document.getElementById("myName").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const user = document.getElementById("user").value.trim();
-        const file = fileInput.files[0];
+        let isValid = true;
 
+        // Reset errors
+        [nameError, emailError, userError, avatarError].forEach(err => err.style.display = "none");
+        [nameInput, emailInput, userInput].forEach(input => input.classList.remove("error"));
 
-        if (!name || !email || !user) {
-
-            return;
+        // Name validation
+        if (nameInput.value.trim() === "") {
+            nameError.textContent = "Full name is required";
+            nameError.style.display = "block";
+            isValid = false;
         }
 
-        // Save text values
-        localStorage.setItem("confName", name);
-        localStorage.setItem("confEmail", email);
-        localStorage.setItem("confUser", user);
+        // Email validation
+        if (!emailInput.value.includes("@")) {
+            emailError.textContent = "Please enter a valid email with @";
+            emailError.style.display = "block";
+            isValid = false;
+        }
 
-        // Ticket ID
-        // const ticketId = "#" + Math.floor(10000 + Math.random() * 90000);
-        // localStorage.setItem("confTicketId", ticketId);
+        // GitHub username validation
+        if (!userInput.value.startsWith("@")) {
+            userError.textContent = "GitHub username must start with @";
+            userError.style.display = "block";
+            isValid = false;
+        }
 
-        // Save avatar (if any)
+        // Avatar validation
+        if (!fileInput.files[0]) {
+            avatarError.textContent = "Please upload your avatar";
+            avatarError.style.display = "block";
+            isValid = false;
+        }
+
+        if (!isValid) return; // stop if invalid
+
+        // Save data
+        localStorage.setItem("confName", nameInput.value.trim());
+        localStorage.setItem("confEmail", emailInput.value.trim());
+        localStorage.setItem("confUser", userInput.value.trim());
+
+        const file = fileInput.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = (event) => {
@@ -149,4 +98,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-

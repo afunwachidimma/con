@@ -29,8 +29,10 @@
                             <button type="button" id="removeBtn">Remove</button>
                         </div>
                     </div>
+
                 </div>
             </div>
+            <span class="error" id="avatarError"></span>
             <p class="p3">
                 <small>
                     <img src="./images/icon-info.svg" alt="">
@@ -40,10 +42,13 @@
             <div class="form">
                 <label class="lab" for="name">Full Name :</label> <br>
                 <input class="input" type="text" id="myName" name="name"><br>
+                <span class="error" id="nameError"></span><br>
                 <label class="lab" for="email">Email Address :</label><br>
                 <input class="input" type="email" name="email" id="email" placeholder="example@email.com"><br>
+                <span class="error" id="emailError"></span><br>
                 <label class="lab" for="user">Github Username :</label><br>
                 <input class="input" type="text" name="user" id="user" placeholder="@yourusername"><br>
+                <span class="error" id="userError"></span><br>
                 <button id="btn2">Generate my Ticket</button>
             </div>
         </form>

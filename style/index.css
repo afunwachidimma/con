@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=inconsolata:wght@200..900&display=swap');
+
 #main {
     background: url(../images/pattern-circle.svg),
         url(../images/pattern-lines.svg),
@@ -70,6 +72,10 @@
     border: none;
     color: white;
     padding: 0.5rem;
+}
+
+.input:hover {
+    color: white;
 }
 
 .form {
@@ -147,26 +153,45 @@
     color: white;
 }
 
-@media screen and (min-width:1440px) {
+.input.error {
+    border: 1px solid red;
+    background-color: #ffe6e6;
+
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    display: none;
+
+}
+
+#avatarError {
+    display: block;
+    margin-top: 5px;
+    margin-left: 3rem;
+}
+
+@media screen and (min-width:1024px) {
     #main {
         background: url(../images/pattern-circle.svg),
             url(../images/pattern-lines.svg),
             url(../images/pattern-squiggly-line-top.svg),
             url(../images/pattern-circle.svg),
             url(../images/pattern-squiggly-line-bottom-desktop.svg),
-            url(../images/background-mobile.png);
+            url(../images/background-desktop.png);
         background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
         background-position: 57rem 30rem, calc(100% - 20px) 20px, calc(100% + 10px) 1%, -50px -50px, left bottom, center;
-        background-size: 230px, 1400px, 30rem, 230px, 850px, cover;
+        background-size: 230px, 1400px, 20rem, 230px, 500px, cover;
         color: white;
-        height: 100vh;
-        /* width: 100%; */
+        height: 100%;
+        /* width: 100px; */
         margin-left: 1rem;
     }
 
     #img1 {
         width: 13.7rem;
-        margin: 0.7rem 0 1.5rem 35rem;
+        margin: -1rem 0 1.5rem 28rem;
     }
 
     #img2 {
@@ -177,9 +202,9 @@
     }
 
     .h1 {
-        margin: -3.5rem 17rem 1rem 17rem;
+        margin: -4.5rem 9.8rem 1rem 9.8rem;
         text-align: center;
-        font-size: 3.7rem;
+        font-size: 3rem;
         word-spacing: 1rem;
     }
 
@@ -190,39 +215,39 @@
     }
 
     .p2 {
-        margin-left: 29rem;
+        margin-left: 19rem;
         font-size: 1.1rem;
-        margin-top: 1.7rem;
+        margin-top: 1rem;
     }
 
     #sub {
         width: 35%;
-        margin: 0 29rem;
-        height: 6.9rem;
+        margin: 0 19rem;
+        height: 5rem;
     }
 
     .p3 {
-        margin: 0.9rem 0 0.9rem 29rem;
+        margin: 0.9rem 0 0rem 19rem;
         font-size: 1.15rem;
     }
 
     .lab {
-        margin: 1.7rem 0 0.4rem 29rem;
+        margin: 1.7rem 0 0.4rem 18rem;
         font-size: 1.6rem;
     }
 
     .input {
-        margin: 0.7rem 0 1.7rem 29rem;
+        margin: 0.7rem 0 1rem 18rem;
         width: 34%;
-        height: 3rem;
+        height: 2rem;
         font-size: 1rem;
         outline: 1px solid white;
 
     }
 
     #btn2 {
-        margin-left: 29rem;
-        width: 35%;
+        margin-left: 18rem;
+        width: 35.5%;
         bottom: 1rem;
         margin-top: 1.9rem;
         height: 3rem;
@@ -238,7 +263,7 @@
     }
 
     #preview {
-        /* margin-top: 10px; */
+        margin-top: -10px;
         text-align: center;
     }
 
@@ -248,7 +273,7 @@
         border-radius: 50%;
         object-fit: cover;
         display: block;
-        margin: 0 auto 10px;
+        margin: 0 auto 8px;
     }
 
     #preview .buttons {
@@ -267,6 +292,23 @@
     #changeBtn {
         background: #4CAF50;
         color: white;
+    }
+
+    #removeBtn {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .input.error {
+        margin: 0.7rem 0 1rem 18rem;
+    }
+
+    .error {
+        margin-left: 18rem;
+    }
+
+    #avatarError {
+        margin-left: 20rem;
     }
 
 }
